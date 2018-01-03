@@ -1,0 +1,35 @@
+[user]
+	email = esther@selfawaresoup.com
+	name = Esther Weidauer
+[push]
+	default = current
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[core]
+	excludesfile = ~/.gitignore_global
+	trustctime = false
+
+[alias]
+	la = "!git config -l | grep alias | cut -c 7-"
+	s = "status -s"
+	st = "status"
+	d = "diff"
+	dw = "diff -w"
+	dwd = "diff --word-diff"
+	co = "checkout"
+	cob = "checkout -b"
+	cim = "commit -m"
+	cia = "commit -a"
+	ciam = "commit -a -m"
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	le = log --oneline --decorate
+	fa = fetch --all
+	pu = pull --rebase
+	sq = "!f() { git rebase -i HEAD~$1; }; f"
+	
+	yolo = "!f() { git add -A . && git commit -m $1 && git push -f origin master; }; f"

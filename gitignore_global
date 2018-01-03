@@ -1,0 +1,6 @@
+composer.lock
+.DS_Store
+.tern-port
+npm-debug.log
+.DS_Store
+.dir-locals.el
