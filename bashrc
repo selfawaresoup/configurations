@@ -17,4 +17,3 @@ for f in $INCLUDE_DIR/*.sh; do source $f; done
 if [ -f "$HOME/.bashrc.local" ]; then
    source "$HOME/.bashrc.local"
 fi
-

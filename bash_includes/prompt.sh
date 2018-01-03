@@ -38,8 +38,18 @@ function setPrompt() {
     if [ -n "$GIT_BRANCH" ]; then
         GIT_STATUS=$GIT_STATUS$GIT_BRANCH
     fi
-    PROMPT_START="# $(colorize $Time Blue) $LastReturn $HistoryId $(colorize $User@$Host Cyan):$PathShort"
-    PROMPT_END="$ "
+
+    if [ $(id -u) -eq 0 ];
+    then
+        # user is root, better be red and show a "#"
+        PROMPT_END="# "
+        USER_HOST="$(colorize $User@$Host Red)"
+    else
+        USER_HOST="$(colorize $User@$Host Cyan)"
+        PROMPT_END="$ "
+    fi
+
+    PROMPT_START="# $(colorize $Time Blue) $LastReturn $HistoryId $USER_HOST:$PathShort"
 
     if [ -n "$GIT_STATUS" ]; then
         PS1="$PROMPT_START $(colorize \($GIT_STATUS\) Green) $PROMPT_END"

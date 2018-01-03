@@ -10,6 +10,7 @@ gitconfig
 gitignore_global
 spacemacs
 spacemacs.d
+tmux.conf
 vim
 ssh/config.d'
 

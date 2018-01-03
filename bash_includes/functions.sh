@@ -108,3 +108,17 @@ function goprodump {
     mv $TMP_DIR/$BASE_PATH/* .
     rm -rf $TMP_DIR index.html*
 }
+
+function cleardnsmacos {
+  sudo killall -HUP mDNSResponder
+  sudo killall mDNSResponderHelper
+  sudo dscacheutil -flushcache
+}
+
+function unbork-my-wifi {
+    echo "Turning it off ..."
+    networksetup -setairportpower en0 off
+    sleep 2
+    echo "... and on again."
+    networksetup -setairportpower en0 on
+}

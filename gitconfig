@@ -3,6 +3,8 @@
 	name = Esther Weidauer
 [push]
 	default = current
+[pull]
+	rebase = true
 [color]
     branch = auto
     diff = auto

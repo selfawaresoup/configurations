@@ -4,3 +4,7 @@ composer.lock
 npm-debug.log
 .DS_Store
 .dir-locals.el
+.__local*
+
+.versions.conf
+.vscode
