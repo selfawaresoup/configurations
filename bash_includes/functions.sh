@@ -122,3 +122,22 @@ function unbork-my-wifi {
     echo "... and on again."
     networksetup -setairportpower en0 on
 }
+
+confirm() {
+    # call with a prompt string or use a default
+    read -r -p "${1:-Are you sure? [y/N]} " response
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+function clear-screenshots {
+    echo "Screenshot files:"
+    ls -1 ~/Desktop/Screen\ Shot\ *
+    confirm "Sure?" && rm  ~/Desktop/Screen\ Shot\ *
+}
