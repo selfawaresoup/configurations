@@ -1,2 +1,6 @@
 Host *
     SendEnv GIT_*
+
+Host git.selfawaresoup.com
+    Port 9022
+    User ubuntu
