@@ -136,8 +136,3 @@ confirm() {
     esac
 }
 
-function clear-screenshots {
-    echo "Screenshot files:"
-    ls -1 ~/Desktop/Screen\ Shot\ *
-    confirm "Sure?" && rm  ~/Desktop/Screen\ Shot\ *
-}
