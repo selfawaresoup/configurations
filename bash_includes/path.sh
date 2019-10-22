@@ -2,6 +2,8 @@
 
 PATH=/usr/local/opt/ruby/bin:$PATH # homebrew ruby
 PATH=/usr/local/lib/ruby/gems/2.6.0/bin:$PATH # homebrew gems
+PATH=/Library/Frameworks/Python.framework/Versions/3.8/bin:$PATH # python3
+
 
 PATH=$PATH:$HOME/.bin # Add home .bin to PATH
 PATH=$PATH:$HOME/.bin/node_modules/.bin
