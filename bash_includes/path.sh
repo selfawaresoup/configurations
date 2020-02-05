@@ -14,4 +14,3 @@ PATH=$PATH:/usr/local/share/npm/bin # NPM bins
 
 PATH=$PATH:$HOME/Library/Android/sdk/tools # Android SDK tools
 PATH=$PATH:$HOME/Library/Android/sdk/platform-tools # Android SDK tools
-
