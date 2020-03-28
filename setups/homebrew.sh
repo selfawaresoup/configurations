@@ -3,7 +3,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     if [[ ! $(which brew) ]]; then
-        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 
     brew update > /dev/null 2>&1
