@@ -8,6 +8,7 @@ PATH=/Library/Frameworks/Python.framework/Versions/3.8/bin:$PATH # python3
 PATH=$PATH:$HOME/.bin # Add home .bin to PATH
 PATH=$PATH:$HOME/.bin/node_modules/.bin
 PATH=$PATH:$HOME/.cargo/bin # rust binaries
+PATH=$PATH:/opt/homebrew/bin # M1 compatible homebrew on macOS
 PATH=$PATH:/usr/local/bin # Homebrew bin
 PATH=$PATH:/usr/local/sbin # Homebrew sbi
 PATH=$PATH:/usr/local/share/npm/bin # NPM bins
