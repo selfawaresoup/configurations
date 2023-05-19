@@ -9,3 +9,7 @@ export LESS="-iMFXR"
 
 # silence macOS Catalina default shell notice
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export PLAYDATE_SDK_PATH="$HOME/Developer/PlaydateSDK"
+
+export LANGUAGE=en
