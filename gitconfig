@@ -11,7 +11,7 @@
     status = auto
 
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/esther/.gitignore_global
 	trustctime = false
 
 [alias]
@@ -37,3 +37,11 @@
 	yolo = "!f() { git add -A . && git commit -m $1 && git push -f origin master; }; f"
 [credential]
 	helper = osxkeychain
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[init]
+	defaultBranch = main
