@@ -1,4 +1,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+" see https://github.com/junegunn/vim-plug for docs
+Plug 'preservim/nerdtree'
+Plug 'vim-latex/vim-latex'
+Plug 'ntk148v/vim-horizon'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'liuchengxu/space-vim-theme'
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible  "enable VIM improvements
@@ -23,21 +35,24 @@ set undodir=~/.vim/undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, ab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab     "convert tabs to spaces
-set shiftwidth=4  "length for indentation
-set tabstop=4     "length for tabs
-set smarttab      "enable smart indetation
-"set fdm=indent    "set indentation mode
-set autoindent    "enable auto indentation
+set noexpandtab			"don't convert tabs to spaces
+set shiftwidth=2    "length for indentation
+set tabstop=2       "length for tabs
+set smarttab        "enable smart indetation
+"set fdm=indent     "set indentation mode
+set autoindent      "enable auto indentation
 
 set textwidth=120
 set breakindent
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Color/display related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=Monaco:h14
+
 " set background=dark "what it says, duh!
-color slate         "choose color scheme
+color space_vim_theme "choose color scheme
 let &t_Co=256       "tell vim that the terminal support 256 colors
 set hls!            "highlight search hits
 syntax enable       "enable syntax highlighting
