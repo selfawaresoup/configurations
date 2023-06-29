@@ -53,7 +53,7 @@ set noexpandtab			"don't convert tabs to spaces
 set shiftwidth=2    "length for indentation
 set tabstop=2       "length for tabs
 set smarttab        "enable smart indetation
-"set fdm=indent     "set indentation mode
+set fdm=indent     "set indentation mode
 set autoindent      "enable auto indentation
 
 set textwidth=120
