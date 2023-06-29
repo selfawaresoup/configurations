@@ -220,7 +220,7 @@ nnoremap <Leader>w :w <Enter>
 nnoremap <Leader>nt :NERDTree <Enter>
 nnoremap <Leader>tb :botright terminal <Enter>
 nnoremap <Leader>bcp :bprevious<BAR>bdelete#<Enter>
-nnoremap <Leader>bco :CloseOtherBuffers  <Enter>
+nnoremap <Leader>bco :CloseOtherBuffers <Enter>
 
 "<Enter> indentation in visual mode
 vmap < <gv
