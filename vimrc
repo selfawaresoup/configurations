@@ -4,21 +4,18 @@
 call plug#begin()
 " see https://github.com/junegunn/vim-plug for docs
 
-" begin: themes"
+" begin themes"
 Plug 'ntk148v/vim-horizon'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'liuchengxu/space-vim-theme'
-" end themes
 
-" begin: rust
+" begin rust
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
-" end: rust
 
-" begin: latex
+" begin latex
 Plug 'vim-latex/vim-latex'
-" end: latex
 
 " misc plugins
 Plug 'preservim/nerdtree'
@@ -105,7 +102,7 @@ set showmode                " show the current (paste) mode on the open buffer
 set ttyfast                 " may improve scrolling performance
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Statusbar
+" Statusline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%f       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -122,12 +119,13 @@ set statusline+=\ %P    "percent through file
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wildmenu                " enable menu at the bottom
-set wildmode=longest:full,full " wildcard matches show a list, matching the longest first, try list:longest
-set wildignore+=.git,.hg,.svn " ignore version control repos
-set wildignore+=*.pyc       " ignore Python compiled files
-set wildignore+=*.rbc       " ignore Rubinius compiled files
-set wildignore+=*.swp       " ignore vim backups
+set wildmenu                      " enable menu at the bottom
+set wildmode=longest:full         " wildcard matches show a list, matching the longest first, try list:longest
+set wildignore+=.git,.hg,.svn     " ignore version control repos
+set wildignore+=*.pyc             " ignore Python compiled files
+set wildignore+=*.rbc             " ignore Rubinius compiled files
+set wildignore+=*.swp             " ignore vim backups
+set wildignore+=*/node_modules/*  " ignore node_modules
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search related
@@ -163,41 +161,73 @@ autocmd FileType make
 " => Startup stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! CloseOtherBuffers()
+	" closes all buffers that are named and listed (should skip e.g. NERDTree)
+	" only closes hidden buffers so the current one stays open
+  let l:buffers = getbufinfo()
+	for l:buf in buffers
+		if buf.listed == 1 && buf.hidden == 1 && buf.name =~ '^\/'
+			execute "bdelete " . buf.bufnr
+		endif
+	endfor
+endfunction
+
+:command CloseOtherBuffers call CloseOtherBuffers()
+
+" automatically resize new terminal windows
+autocmd TerminalWinOpen *
+  \ if &buftype == 'terminal' |
+  \   resize 10 |
+  \ endif
+
+" change default mode of CtrlP
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keybindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
-nnoremap <Leader>nt :NERDTree <Enter>
-nnoremap <Leader>tb :botright terminal <Enter>
-nnoremap <Leader>bc :bprevious<BAR>bdelete#<Enter>
-
 " folding
 "   z1    set folding level to 1
 "   z2    set folding level to 2
 "   za    toggle a fold (vim default)
+"   z0    open all folds
 noremap <Leader>z1 :setlocal foldlevel=1 <Enter>
 noremap <Leader>z2 :setlocal foldlevel=2 <Enter>
 noremap <Leader>z0 :setlocal foldlevel=1000 <Enter> " open all folds
 
 " Coc bindings
+
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Misc
 "   h     remove search highlight
-"   stw   remove trailing whitespace
-"   u     open undo history browser
+"   stw   remove trailing whitespace in current buffer
 "   w     write buffer
-noremap <Leader>h :nohl <Enter>
-nnoremap <leader>stw :%s/\s\+$//<cr>:let @/=''<CR> " strip all trailing whitespace in the current file
-noremap <Leader>w :w <Enter>
+"   nt    open NERDTree
+"   tb    open terminal at the bottom
+"   bc    close buffer and go to previously opened one
+"   bco   close buffers exceot for current one
+nnoremap <Leader>h :nohl <Enter>
+nnoremap <leader>stw :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <Leader>w :w <Enter>
+nnoremap <Leader>nt :NERDTree <Enter>
+nnoremap <Leader>tb :botright terminal <Enter>
+nnoremap <Leader>bcp :bprevious<BAR>bdelete#<Enter>
+nnoremap <Leader>bco :CloseOtherBuffers  <Enter>
+
+"<Enter> indentation in visual mode
 vmap < <gv
 vmap > >gv
 
-set backspace=indent,eol,start    " make backspace behave normally
+" make backspace behave normally
+set backspace=indent,eol,start
 
+" enable mouse in all modes
 set mouse=a
