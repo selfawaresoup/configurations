@@ -2,16 +2,16 @@ DIR=$(pwd)
 
 cd ~
 
+mkdir -p .bin
+
+# begin: symlinks
 LINKS='bashrc
 bash_profile
 inputrc
 vimrc
 gitconfig
 gitignore_global
-spacemacs
-spacemacs.d
 tmux.conf
-vim
 ssh/config.d'
 
 for L in $LINKS; do
@@ -24,10 +24,18 @@ for L in $LINKS; do
     ln -s "$DIR/$L" ".$L"
     echo
 done
+# end: symlinks
 
-mkdir -p .bin
-ln -s "$DIR/package.json" .bin/package.json
-cd .bin
+# begin: vim
+mkdir -p ~/.vim/undo
+mkdir -p ~/.vim/swap
+mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/autoload
+
+curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+vim -E +PlugInstall +qall
+# end: vim
 
 cd $DIR
 

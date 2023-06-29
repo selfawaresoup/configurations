@@ -3,11 +3,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
 " see https://github.com/junegunn/vim-plug for docs
-Plug 'preservim/nerdtree'
-Plug 'vim-latex/vim-latex'
+
+" begin: themes"
 Plug 'ntk148v/vim-horizon'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'liuchengxu/space-vim-theme'
+" end themes
+
+" begin: rust
+Plug 'rust-lang/rust.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+" end: rust
+
+" begin: latex
+Plug 'vim-latex/vim-latex'
+" end: latex
+
+" misc plugins
+Plug 'preservim/nerdtree'
+Plug 'mattn/emmet-vim' "https://github.com/mattn/emmet-vim/blob/master/doc/emmet.txt
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -51,7 +68,7 @@ set breakindent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guifont=Monaco:h14
 
-" set background=dark "what it says, duh!
+set background=dark "what it says, duh!
 color space_vim_theme "choose color scheme
 let &t_Co=256       "tell vim that the terminal support 256 colors
 set hls!            "highlight search hits
@@ -155,6 +172,10 @@ autocmd FileType make
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
+nnoremap <Leader>nt :NERDTree <Enter>
+nnoremap <Leader>tb :botright terminal <Enter>
+nnoremap <Leader>bc :bprevious<BAR>bdelete#<Enter>
+
 " folding
 "   z1    set folding level to 1
 "   z2    set folding level to 2
@@ -163,13 +184,17 @@ noremap <Leader>z1 :setlocal foldlevel=1 <Enter>
 noremap <Leader>z2 :setlocal foldlevel=2 <Enter>
 noremap <Leader>z0 :setlocal foldlevel=1000 <Enter> " open all folds
 
+" Coc bindings
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Misc
 "   h     remove search highlight
 "   stw   remove trailing whitespace
 "   u     open undo history browser
+"   w     write buffer
 noremap <Leader>h :nohl <Enter>
 nnoremap <leader>stw :%s/\s\+$//<cr>:let @/=''<CR> " strip all trailing whitespace in the current file
+noremap <Leader>w :w <Enter>
 vmap < <gv
 vmap > >gv
 
