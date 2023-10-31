@@ -83,6 +83,12 @@ function mdir {
     mkdir -p $1 && cd $1;
 }
 
+function touchp {
+	local DIR=$(dirname $1)
+	mkdir -p $DIR
+	touch $1
+}
+
 # plays a stream of bytes (8bit samples) from STDIN at 8kHz
 function 8bitplay {
   play -traw -r8000 -b8 -e unsigned-integer - -tcoreaudio
