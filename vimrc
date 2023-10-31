@@ -4,14 +4,16 @@
 call plug#begin()
 " see https://github.com/junegunn/vim-plug for docs
 
+" Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " begin themes"
 Plug 'ntk148v/vim-horizon'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'liuchengxu/space-vim-theme'
 
 " begin rust
-Plug 'rust-lang/rust.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
 
 " begin latex
@@ -24,6 +26,14 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 call plug#end()
 
+
+function! InstallCoCExtensions()
+	execute "CocInstall coc-spell-checker"
+	execute "CocInstall coc-rust-analyzer"
+	execute "CocInstall coc-tsserver"
+endfunction
+:command! InstallCoCExtensions call InstallCoCExtensions()
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -34,6 +44,7 @@ set modeline      "enable vim modelines usage
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Window/Tab related                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeQuitOnOpen=1 "close NERDTree when opening a file
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Swap and Backup related
@@ -56,8 +67,8 @@ set smarttab        "enable smart indetation
 set fdm=indent     "set indentation mode
 set autoindent      "enable auto indentation
 
-set textwidth=120
 set breakindent
+set lbr
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,6 +122,7 @@ set statusline+=%h      "help file flag
 set statusline+=%m      "modified flag
 set statusline+=%r      "read only flag
 set statusline+=%y      "filetype
+set statusline+=[%{wordcount().words}\ words]
 set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
@@ -157,6 +169,11 @@ autocmd FileType make
   \ setlocal tabstop=4 |
   \ setlocal noexpandtab
 
+autocmd FileType markdown
+	\ let b:coc_suggest_disable = 1 |
+	\ set statusline+=%{wordcount().words}\ words
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Startup stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,7 +194,7 @@ function! CloseOtherBuffers()
 	endfor
 endfunction
 
-:command CloseOtherBuffers call CloseOtherBuffers()
+:command! CloseOtherBuffers call CloseOtherBuffers()
 
 " automatically resize new terminal windows
 autocmd TerminalWinOpen *
@@ -191,6 +208,12 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keybindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" noremap <Up> gk
+" noremap <Down> gj
+" inoremap <Up> <C-o>gk
+" inoremap <Down> <C-o>gj
+
 let mapleader = ","
 
 " folding
@@ -205,6 +228,8 @@ noremap <Leader>z0 :setlocal foldlevel=1000 <Enter> " open all folds
 " Coc bindings
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Misc
 "   h     remove search highlight
@@ -212,8 +237,9 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm(): "\<C-g>u\<CR
 "   w     write buffer
 "   nt    open NERDTree
 "   tb    open terminal at the bottom
-"   bc    close buffer and go to previously opened one
+"   bcp   close buffer and go to previously opened one
 "   bco   close buffers exceot for current one
+"   bb    open CtrlP in buffers mode
 nnoremap <Leader>h :nohl <Enter>
 nnoremap <leader>stw :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <Leader>w :w <Enter>
@@ -221,6 +247,7 @@ nnoremap <Leader>nt :NERDTree <Enter>
 nnoremap <Leader>tb :botright terminal <Enter>
 nnoremap <Leader>bcp :bprevious<BAR>bdelete#<Enter>
 nnoremap <Leader>bco :CloseOtherBuffers <Enter>
+nnoremap <Leader>bb :CtrlPBuffer <Enter>
 
 "<Enter> indentation in visual mode
 vmap < <gv
