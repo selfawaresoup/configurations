@@ -4,5 +4,5 @@
 # This mess can be avoided by just sourcing .bashrc from here to have it execute every time.
 
 if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
+	source ~/.bashrc
 fi

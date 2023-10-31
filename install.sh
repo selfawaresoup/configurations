@@ -15,14 +15,14 @@ tmux.conf
 ssh/config.d'
 
 for L in $LINKS; do
-    # check if the file/dir/link exists and backup the existing version
-    if [[ -e ".$L" ]]; then
-        echo "Backing up .$L"
-        mv ".$L" ".$L.backup"
-    fi
-    echo "Linking .$L"
-    ln -s "$DIR/$L" ".$L"
-    echo
+	# check if the file/dir/link exists and backup the existing version
+	if [[ -e ".$L" ]]; then
+		echo "Backing up .$L"
+		mv ".$L" ".$L.backup"
+	fi
+	echo "Linking .$L"
+	ln -s "$DIR/$L" ".$L"
+	echo
 done
 # end: symlinks
 
