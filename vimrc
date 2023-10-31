@@ -4,35 +4,16 @@
 call plug#begin()
 " see https://github.com/junegunn/vim-plug for docs
 
-" Coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 " begin themes"
 Plug 'ntk148v/vim-horizon'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'liuchengxu/space-vim-theme'
 
-" begin rust
-" Plug 'rust-lang/rust.vim'
-Plug 'dense-analysis/ale'
-
-" begin latex
-Plug 'vim-latex/vim-latex'
-
 " misc plugins
 Plug 'preservim/nerdtree'
-Plug 'mattn/emmet-vim' "https://github.com/mattn/emmet-vim/blob/master/doc/emmet.txt
 Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-surround'
 call plug#end()
 
-
-function! InstallCoCExtensions()
-	execute "CocInstall coc-spell-checker"
-	execute "CocInstall coc-rust-analyzer"
-	execute "CocInstall coc-tsserver"
-endfunction
-:command! InstallCoCExtensions call InstallCoCExtensions()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
@@ -225,11 +206,6 @@ noremap <Leader>z1 :setlocal foldlevel=1 <Enter>
 noremap <Leader>z2 :setlocal foldlevel=2 <Enter>
 noremap <Leader>z0 :setlocal foldlevel=1000 <Enter> " open all folds
 
-" Coc bindings
-
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Misc
 "   h     remove search highlight
