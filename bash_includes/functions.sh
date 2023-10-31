@@ -83,6 +83,7 @@ function mdir {
     mkdir -p $1 && cd $1;
 }
 
+# creates an empty file and all the missing directories along its path
 function touchp {
 	local DIR=$(dirname $1)
 	mkdir -p $DIR
