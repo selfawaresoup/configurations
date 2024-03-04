@@ -1,21 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin()
-" see https://github.com/junegunn/vim-plug for docs
-
-" begin themes"
-Plug 'ntk148v/vim-horizon'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'liuchengxu/space-vim-theme'
-
-" misc plugins
-Plug 'preservim/nerdtree'
-Plug 'kien/ctrlp.vim'
-call plug#end()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible	"enable VIM improvements
@@ -55,19 +38,16 @@ set lbr
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Color/display related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guifont=Monaco:h14
-
-set background=dark "what it says, duh!
-color space_vim_theme "choose color scheme
+colorscheme slate "choose color scheme
 let &t_Co=256				"tell vim that the terminal support 256 colors
 set hls!						"highlight search hits
 syntax enable				"enable syntax highlighting
 set showmatch				"show matching braces/brackets/parens
-" set number				"display line numbers
-set relativenumber
+set number				"display line numbers
+" set relativenumber
 set laststatus=2		"always show the status bar even if there's only one window
 
-set cursorline
+" set cursorline
 " set cursorcolumn
 
 set scrolloff=8			" keep more context when scrolling off the end of a buffer
@@ -161,30 +141,9 @@ autocmd FileType markdown
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Commands
+" => Custom Commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! CloseOtherBuffers()
-	" closes all buffers that are named and listed (should skip e.g. NERDTree)
-	" only closes hidden buffers so the current one stays open
-	let l:buffers = getbufinfo()
-	for l:buf in buffers
-		if buf.listed == 1 && buf.hidden == 1 && buf.name =~ '^\/'
-			execute "bdelete " . buf.bufnr
-		endif
-	endfor
-endfunction
-
-:command! CloseOtherBuffers call CloseOtherBuffers()
-
-" automatically resize new terminal windows
-autocmd TerminalWinOpen *
-	\ if &buftype == 'terminal' |
-	\		resize 10 |
-	\ endif
-
-" change default mode of CtrlP
-let g:ctrlp_cmd = 'CtrlPMixed'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keybindings
@@ -217,7 +176,7 @@ noremap <Leader>z0 :setlocal foldlevel=1000 <Enter> " open all folds
 "		bco		close buffers exceot for current one
 "		bb		open CtrlP in buffers mode
 nnoremap <Leader>h :nohl <Enter>
-nnoremap <leader>stw :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>stw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 nnoremap <Leader>w :w <Enter>
 nnoremap <Leader>nt :NERDTree <Enter>
 nnoremap <Leader>tb :botright terminal <Enter>
