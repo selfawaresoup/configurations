@@ -52,8 +52,8 @@ set laststatus=2		"always show the status bar even if there's only one window
 
 set scrolloff=8			" keep more context when scrolling off the end of a buffer
 
-set list										" show invisible characters
-set listchars=tab:›\				" set tabulator character
+ set list										" show invisible characters
+set listchars=tab:›\ 				" set tabulator character
 set listchars+=trail:⋅			" set trailing whitespace character
 "set listchars+=eol:¬				" set end-of-line character
 set showbreak=↪							" the character to put to show a line has been wrapped
