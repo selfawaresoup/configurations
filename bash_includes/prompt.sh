@@ -39,7 +39,7 @@ function setPrompt() {
 		GIT_STATUS=$GIT_STATUS$GIT_BRANCH
 	fi
 
-	if [ $(id -u) -eq 0 ];
+	if [ "$(id -u)" -eq 0 ];
 	then
 		# user is root, better be red and show a "#"
 		PROMPT_END="# "
